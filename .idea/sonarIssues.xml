@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/composite/product/ProductAggregate.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/composite/product/ProductCompositeService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/composite/product/RecommendationSummary.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/composite/product/ReviewSummary.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/composite/product/ServiceAddresses.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/core/product/Product.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/core/product/ProductService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/core/recommendation/Recommendation.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/core/recommendation/RecommendationService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/core/review/Review.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/core/review/ReviewService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/core/review/Revieww.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/ProductCompositeServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/services/ProductCompositeIntegration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/services/ProductCompositeServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/test/java/com/jkc/microservices/composite/product/ProductCompositeServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/ProductServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/productservice/ProductServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/services/ProductServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/test/java/com/jkc/microservices/core/product/ProductServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/RecommendationServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/services/RecommendationServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/resources/application.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/test/java/com/jkc/microservices/core/recommendation/RecommendationServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/ReviewServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/services/ReviewServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/test/java/com/jkc/microservices/core/review/ReviewServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/settings.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/test_them.sh">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/exceptions/InvalidInputException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/exceptions/NotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/http/GlobalControllerExceptionHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/http/HttpErrorInfo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/http/ServiceUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
