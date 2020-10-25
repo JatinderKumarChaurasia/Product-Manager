@@ -29,7 +29,8 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Product getProduct(int productID) {
-        LOGGER.debug("/product return the found product for productId={}", productID);
+        System.out.println(serviceUtil.getServiceAddress());
+        LOGGER.debug("/product return the found product for productId={} serviceAddress: {}" , productID,serviceUtil.getServiceAddress());
         if (productID <1) {
             throw new InvalidInputException("Invalid ProductID: "+productID);
         }

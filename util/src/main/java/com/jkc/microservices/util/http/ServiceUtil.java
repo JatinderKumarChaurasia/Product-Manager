@@ -25,7 +25,7 @@ public class ServiceUtil {
             serviceAddress = findMyHostName()+"/"+findMyIPAddress()+":"+port;
             LOGGER.info("service Address got :{}",serviceAddress);
         }
-        return null;
+        return serviceAddress;
     }
 
     private String findMyHostName() {

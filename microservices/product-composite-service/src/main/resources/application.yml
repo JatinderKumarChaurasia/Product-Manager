@@ -18,3 +18,21 @@ logging:
   level:
     root: INFO
     com.jkc.microservices: DEBUG
+
+---
+
+spring:
+  profiles: docker
+server:
+  port: 7004
+
+app:
+  product-service:
+    host: product
+    port: 7004
+  recommendation-service:
+    host: recommendation
+    port: 7004
+  review-service:
+    host: review
+    port: 7004

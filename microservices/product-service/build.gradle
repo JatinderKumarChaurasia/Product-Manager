@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.jkc.microservices.core.product'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '15'
+sourceCompatibility=15
 
 repositories {
 	mavenCentral()

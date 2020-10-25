@@ -91,8 +91,8 @@ class ProductCompositeServiceApplicationTests {
 				.jsonPath("$.message").isEqualTo("INVALID: " + PRODUCT_ID_INVALID);
 	}
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 }

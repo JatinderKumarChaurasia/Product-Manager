@@ -7,3 +7,8 @@ logging:
     root: INFO
     com.jkc.microservices: DEBUG
 
+---
+server:
+  port: 7004
+spring:
+  profiles: docker
