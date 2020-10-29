@@ -18,3 +18,10 @@ if microservice is missing due to failure - restart it with this command
 
     curl -d http://localhost:7004/product-composite/123
     curl http://localhost:7004/product-composite/123 -s | jq .
+    
+ For Swagger-UI
+ --------------------------
+ localhost:7004/swagger-ui.html is not working right now
+ localhost:7004/v2/api-docs - working
+ localhost:7004/swagger-resources - working
+ 

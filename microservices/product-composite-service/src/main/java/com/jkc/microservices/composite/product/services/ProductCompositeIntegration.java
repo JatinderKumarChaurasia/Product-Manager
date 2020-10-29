@@ -46,9 +46,10 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
             @Value("${app.review-service.port}") int reviewServicePort) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
-        productServiceUrl        = "http://" + productServiceHost + ":" + productServicePort + "/product/";
-        recommendationServiceUrl = "http://" + recommendationServiceHost + ":" + recommendationServicePort + "/recommendation?productID=";
-        reviewServiceUrl         = "http://" + reviewServiceHost + ":" + reviewServicePort + "/review?productID=";
+        String HTTP = "http://";
+        productServiceUrl = HTTP + productServiceHost + ":" + productServicePort + "/product/";
+        recommendationServiceUrl = HTTP + recommendationServiceHost + ":" + recommendationServicePort + "/recommendation?productID=";
+        reviewServiceUrl = HTTP + reviewServiceHost + ":" + reviewServicePort + "/review?productID=";
     }
 
     /**
@@ -61,23 +62,28 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     public Product getProduct(int productID) {
 
         try {
-            String url = productServiceUrl+productID;
-            LOGGER.debug("will call getProduct api on url:{}",url);
-            Product product = restTemplate.getForObject(url,Product.class);
+            String url = productServiceUrl + productID;
+            LOGGER.debug("will call getProduct api on url:{}", url);
+            Product product = restTemplate.getForObject(url, Product.class);
             assert product != null;
-            LOGGER.debug("found a product with id:{}",product.getProductID());
+            LOGGER.debug("found a product with id:{}", product.getProductID());
             return product;
         } catch (HttpClientErrorException exception) {
             switch (exception.getStatusCode()) {
                 case NOT_FOUND -> throw new NotFoundException(getErrorMessage(exception));
                 case UNPROCESSABLE_ENTITY -> throw new InvalidInputException(getErrorMessage(exception));
                 default -> {
-                    LOGGER.warn("Got a unexpected HTTP error: {}, will rethrow it", exception.getStatusCode());
-                    LOGGER.warn("Error body: {}", exception.getResponseBodyAsString());
+                    sonarResolution(exception);
                     throw exception;
                 }
+
             }
         }
+    }
+
+    private void sonarResolution(HttpClientErrorException exception) {
+        LOGGER.warn("Got a unexpected HTTP error: {}, will rethrow it", exception.getStatusCode());
+        LOGGER.warn("Error body: {}", exception.getResponseBodyAsString());
     }
 
     /**
@@ -89,9 +95,10 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     @Override
     public List<Recommendation> getRecommendations(int productID) {
         try {
-            String url = recommendationServiceUrl+productID;
+            String url = recommendationServiceUrl + productID;
             LOGGER.debug("Will call getRecommendations API on URL: {}", url);
-            List<Recommendation> recommendations = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Recommendation>>() {}).getBody();
+            List<Recommendation> recommendations = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Recommendation>>() {
+            }).getBody();
             assert recommendations != null;
             LOGGER.debug("Found {} recommendations for a product with id: {}", recommendations.size(), productID);
             return recommendations;
@@ -112,7 +119,8 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
         try {
             String url = reviewServiceUrl + productID;
             LOGGER.debug("Will call getReviews API on URL: {}", url);
-            List<Review> reviews = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Review>>() {}).getBody();
+            List<Review> reviews = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Review>>() {
+            }).getBody();
             assert reviews != null;
             LOGGER.debug("Found {} reviews for a product with id: {}", reviews.size(), productID);
             return reviews;

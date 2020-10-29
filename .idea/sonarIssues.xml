@@ -88,12 +88,47 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/HELP.md">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/product-composite-service/build.gradle">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/build/reports/tests/test/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/ProductCompositeServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/SwaggerConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/OpenApiConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/SwaggerConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/SwaggerUIConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/WebFluxConfig.java">
           <value>
             <set />
           </value>

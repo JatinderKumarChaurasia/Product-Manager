@@ -79,3 +79,21 @@ rmicroservices/product-service/src/test/java/com/jkc/microservices/core/product/
 „microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/services/RecommendationServiceImpl.java,5\b\5b85e3381602ea3ea351f14f0bc88153b1232ff7
 »
 Šmicroservices/product-composite-service/src/test/java/com/jkc/microservices/composite/product/ProductCompositeServiceApplicationTests.java,7\1\71419b6c660f5b479932d189480c6c8a2a364427
+X
+(microservices/product-service/Dockerfile,3\1\3171c19a426202c73a54619fdef6e7188ca54f73
+B
+docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
+W
+'microservices/product-service/ReadMe.md,f\b\fb1e7fa181aa711fb712c5ee3c1775f89d96f146
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+B
+product-manager.sh,f\e\fe273f54305cb6f7a5ff2680adb8e3cdc18301d7
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+b
+2microservices/product-composite-service/.gitignore,5\5\55220864e6e9f9cc0c7a5054df4dcaca6a60645e
+¯
+microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/OpenApiConfig.java,8\a\8ae2d23e75ee1534cb9d7aa3f0f4137ce3ca6c21
+¯
+microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/WebFluxConfig.java,b\3\b36f0e9d0b3eda5861771422584ad994c0c539a4

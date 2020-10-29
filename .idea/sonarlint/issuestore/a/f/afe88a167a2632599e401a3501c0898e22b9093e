@@ -1,6 +1,5 @@
 
-e
-java:S11921"HDefine a constant instead of duplicating this literal "http://" 3 times.(‘Şå˜8ŒÀÇÈÔ.
 J
-java:S1199J"-Extract this nested code block into a method.(üØô8üºåÈÔ.
+java:S1199K"-Extract this nested code block into a method.(üØô8¼ˆ‚Ö.
 ]	java:S107&"AConstructor has 8 parameters, which is greater than 7 authorized.(Ş¾ˆ¸8„÷ÂÈÔ.
+r	java:S1171"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äª±Úúÿÿÿÿ8—ë‚Ö.

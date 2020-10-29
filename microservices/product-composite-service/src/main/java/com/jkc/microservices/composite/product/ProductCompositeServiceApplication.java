@@ -5,18 +5,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
+
 
 @SpringBootApplication
 @ComponentScan("com.jkc.microservices")
-public class ProductCompositeServiceApplication {
+public class ProductCompositeServiceApplication implements WebFluxConfigurer {
 
-	@Bean
-	RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ProductCompositeServiceApplication.class, args);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProductCompositeServiceApplication.class, args);
-	}
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 }
