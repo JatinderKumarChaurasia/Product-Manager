@@ -5,10 +5,21 @@ server:
 logging:
   level:
     root: INFO
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
     com.jkc.microservices: DEBUG
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: product-db
 
 ---
 server:
   port: 7004
 spring:
   profiles: docker
+  data:
+    mongodb:
+      host: mongodb

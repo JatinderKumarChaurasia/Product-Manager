@@ -88,6 +88,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/docker-compose.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/product-composite-service/HELP.md">
           <value>
             <set />
@@ -158,12 +163,42 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/build/reports/tests/test/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/MongoMyComponent.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/ProductServiceApplication.java">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/mappers/ProductMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/models/ProductEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/productservice/ProductServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/repositories/MyMongoRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/repositories/ProductRepository.java">
           <value>
             <set />
           </value>
@@ -178,6 +213,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/test/java/com/jkc/microservices/core/product/MapperTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/test/java/com/jkc/microservices/core/product/PersistenceTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/product-service/src/test/java/com/jkc/microservices/core/product/ProductServiceApplicationTests.java">
           <value>
             <set />
@@ -188,7 +233,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/build/reports/tests/test/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/RecommendationServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/mappers/CheckMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/mappers/RecommendationMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/models/RecommendationEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/repositories/RecommendationRepository.java">
           <value>
             <set />
           </value>
@@ -208,6 +278,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/test/java/com/jkc/microservices/core/recommendation/MapperTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/test/java/com/jkc/microservices/core/recommendation/MappersTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/test/java/com/jkc/microservices/core/recommendation/PersistenceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/test/java/com/jkc/microservices/core/recommendation/PersistenceTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/test/java/com/jkc/microservices/core/recommendation/RecommendationServiceApplicationTests.java">
           <value>
             <set />
@@ -218,7 +308,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/build/reports/tests/test/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/ReviewServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/mapper/ReviewMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/model/ReviewEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/persistence/ReviewEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/repositories/ReviewRepository.java">
           <value>
             <set />
           </value>
@@ -229,6 +344,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/microservices/review-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/test/java/com/jkc/microservices/core/review/MapperTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/test/java/com/jkc/microservices/core/review/MapperTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/test/java/com/jkc/microservices/core/review/PersistenceTest.java">
           <value>
             <set />
           </value>
@@ -254,6 +384,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/util/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/exceptions/InternalServerException.java">
           <value>
             <set />
           </value>

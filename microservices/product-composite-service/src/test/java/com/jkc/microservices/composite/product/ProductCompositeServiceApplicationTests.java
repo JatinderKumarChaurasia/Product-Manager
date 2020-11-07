@@ -1,5 +1,8 @@
 package com.jkc.microservices.composite.product;
 
+import com.jkc.microservices.api.composite.product.ProductAggregate;
+import com.jkc.microservices.api.composite.product.RecommendationSummary;
+import com.jkc.microservices.api.composite.product.ReviewSummary;
 import com.jkc.microservices.api.core.product.Product;
 import com.jkc.microservices.api.core.recommendation.Recommendation;
 import com.jkc.microservices.api.core.review.Review;
@@ -19,6 +22,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.when;
+import static reactor.core.publisher.Mono.just;
 
 @ExtendWith(SpringExtension.class)
 @WebFluxTest
@@ -48,46 +52,99 @@ class ProductCompositeServiceApplicationTests {
         when(productCompositeIntegration.getProduct(PRODUCT_ID_INVALID)).thenThrow(new InvalidInputException("INVALID: " + PRODUCT_ID_INVALID));
     }
 
+
+    @Test
+    void createCompositeProduct1() {
+        ProductAggregate compositeProduct = new ProductAggregate(1, "name", 1, null, null, null);
+        postAndVerifyProduct(compositeProduct, HttpStatus.OK);
+    }
+
+    @Test
+    void createCompositeProduct2() {
+        ProductAggregate compositeProduct = new ProductAggregate(1, "name", 1,
+                singletonList(new RecommendationSummary(1, "a", 1, "c")),
+                singletonList(new ReviewSummary(1, "a", "s", "c")), null);
+
+        postAndVerifyProduct(compositeProduct, HttpStatus.OK);
+    }
+
+    @Test
+    void deleteCompositeProduct() {
+        ProductAggregate compositeProduct = new ProductAggregate(1, "name", 1,
+                singletonList(new RecommendationSummary(1, "a", 1, "c")),
+                singletonList(new ReviewSummary(1, "a", "s", "c")), null);
+        postAndVerifyProduct(compositeProduct, HttpStatus.OK);
+        deleteAndVerifyProduct(compositeProduct.getProductID(), HttpStatus.OK);
+        deleteAndVerifyProduct(compositeProduct.getProductID(), HttpStatus.OK);
+    }
+
     @Test
     void getProductById() {
-
-        webTestClient.get()
-                .uri("/product-composite/" + PRODUCT_ID_OK)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody()
-                .jsonPath("$.productId").isEqualTo(PRODUCT_ID_OK)
+        getAndVerifyProduct(PRODUCT_ID_OK, HttpStatus.OK)
+//        webTestClient.get()
+//                .uri("/product-composite/" + PRODUCT_ID_OK)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .exchange()
+//                .expectStatus().isOk()
+//                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+//                .expectBody()
+                .jsonPath("$.productID").isEqualTo(PRODUCT_ID_OK)
                 .jsonPath("$.recommendations.length()").isEqualTo(1)
                 .jsonPath("$.reviews.length()").isEqualTo(1);
     }
 
     @Test
     void getProductNotFound() {
-
-        webTestClient.get()
-                .uri("/product-composite/" + PRODUCT_ID_NOT_FOUND)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isNotFound()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody()
+        getAndVerifyProduct(PRODUCT_ID_NOT_FOUND, HttpStatus.NOT_FOUND)
+//        webTestClient.get()
+//                .uri("/product-composite/" + PRODUCT_ID_NOT_FOUND)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .exchange()
+//                .expectStatus().isNotFound()
+//                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+//                .expectBody()
                 .jsonPath("$.path").isEqualTo("/product-composite/" + PRODUCT_ID_NOT_FOUND)
                 .jsonPath("$.message").isEqualTo("NOT FOUND: " + PRODUCT_ID_NOT_FOUND);
     }
 
     @Test
     void getProductInvalidInput() {
-        webTestClient.get()
-                .uri("/product-composite/" + PRODUCT_ID_INVALID)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY)
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody()
+        getAndVerifyProduct(PRODUCT_ID_INVALID, HttpStatus.UNPROCESSABLE_ENTITY)
+//
+//        webTestClient.get()
+//                .uri("/product-composite/" + PRODUCT_ID_INVALID)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .exchange()
+//                .expectStatus().isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY)
+//                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+//                .expectBody()
                 .jsonPath("$.path").isEqualTo("/product-composite/" + PRODUCT_ID_INVALID)
                 .jsonPath("$.message").isEqualTo("INVALID: " + PRODUCT_ID_INVALID);
+    }
+
+    private WebTestClient.BodyContentSpec getAndVerifyProduct(int productID, HttpStatus expectedStatus) {
+        return webTestClient.get()
+                .uri("/product-composite/" + productID)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isEqualTo(expectedStatus)
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody();
+    }
+
+    private void postAndVerifyProduct(ProductAggregate compositeProduct, HttpStatus expectedStatus) {
+        webTestClient.post()
+                .uri("/product-composite")
+                .body(just(compositeProduct), ProductAggregate.class)
+                .exchange()
+                .expectStatus().isEqualTo(expectedStatus);
+    }
+
+    private void deleteAndVerifyProduct(int productID, HttpStatus expectedStatus) {
+        webTestClient.delete()
+                .uri("/product-composite/" + productID)
+                .exchange()
+                .expectStatus().isEqualTo(expectedStatus);
     }
 
 //	@Test

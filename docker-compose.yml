@@ -1,20 +1,27 @@
-version: '3.8'
+version: "3.8"
 services:
   product:
     build: microservices/product-service
     mem_limit: 350m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongodb
   recommendation:
     build: microservices/recommendation-service
     mem_limit: 350M
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongodb
   review:
     build: microservices/review-service
     mem_limit: 350M
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mysql:
+        condition: service_healthy
   product-composite:
     build: microservices/product-composite-service
     mem_limit: 350M
@@ -22,3 +29,30 @@ services:
       - "7004:7004"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+
+  # $ mongo
+  mongodb:
+    image: mongo:latest
+    mem_limit: 350M
+    ports:
+      - "27017:27017"
+    command: mongod
+
+  # $ mysql -u root -h 127.0.0.1 -p
+  mysql:
+    image: mysql:5.7
+    mem_limit: 350M
+    expose:
+      - '3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'absolute'
+      MYSQL_DATABASE: 'review-db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'pwd'
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-uuser", "-ppwd", "-h", "localhost" ]
+      interval: 40s
+      timeout: 5s
+      retries: 10
+
+

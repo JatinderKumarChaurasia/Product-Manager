@@ -1,7 +1,6 @@
 package com.jkc.microservices.api.core.review;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,4 +14,24 @@ public interface ReviewService {
 
     @GetMapping(value = "/review", produces = "application/json")
     List<Review> getReviews(@RequestParam(value = "productID", required = true) int productID);
+
+    /**
+     * usage: curl -X POST $HOST:$PORT/review \
+     * -H "Content-Type: application/json" --data \
+     * '{"productID":123,"reviewId":456,"author":"me","subject":"yada, yada, yada","content":"yada, yada, yada"}'
+     *
+     * @param review description: "review:Review"
+     * @return Review
+     */
+    @PostMapping(value = "/review", consumes = {"application/json"}, produces = {"application/json"})
+    Review createReview(@RequestBody Review review);
+
+    /**
+     * usage: curl -X DELETE $HOST:$PORT/review?productID=1
+     *
+     * @param productID description: "please provide productID:int"
+     */
+    @DeleteMapping(value = "/review")
+    void deleteReview(@RequestParam(value = "productID", required = true) int productID);
+
 }

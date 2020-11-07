@@ -1,10 +1,10 @@
 package com.jkc.microservices.api.core.product;
 
 public class Product {
-    private final int productID;
-    private final String name;
-    private final double weight;
-    private final String serviceAddress;
+    private int productID;
+    private String name;
+    private double weight;
+    private String serviceAddress;
 
     public Product() {
         this.productID = 0;
@@ -24,15 +24,31 @@ public class Product {
         return productID;
     }
 
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getWeight() {
         return weight;
     }
 
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
     public String getServiceAddress() {
         return serviceAddress;
+    }
+
+    public void setServiceAddress(String serviceAddress) {
+        this.serviceAddress = serviceAddress;
     }
 }

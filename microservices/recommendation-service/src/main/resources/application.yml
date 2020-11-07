@@ -2,13 +2,25 @@ server:
   port: 7002
   error:
     include-message: always
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: recommendation-db
+
 logging:
   level:
     root: INFO
     com.jkc.microservices: DEBUG
+    org.springframework.data.mongodb.core: DEBUG
+
 
 ---
 server:
   port: 7004
 spring:
   profiles: docker
+  data:
+    mongodb:
+      host: mongodb

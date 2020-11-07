@@ -1,12 +1,12 @@
 package com.jkc.microservices.api.core.review;
 
 public class Review {
-    private final int productID;
-    private final int reviewID;
-    private final String author;
-    private final String subject;
-    private final String content;
-    private final String serviceAddress;
+    private int productID;
+    private int reviewID;
+    private String author;
+    private String subject;
+    private String content;
+    private String serviceAddress;
 
     public Review() {
         this.productID = 0;
@@ -27,23 +27,48 @@ public class Review {
         return productID;
     }
 
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
     public int getReviewID() {
         return reviewID;
+    }
+
+    public void setReviewID(int reviewID) {
+        this.reviewID = reviewID;
     }
 
     public String getAuthor() {
         return author;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public String getSubject() {
         return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getContent() {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getServiceAddress() {
         return serviceAddress;
     }
+
+    public void setServiceAddress(String serviceAddress) {
+        this.serviceAddress = serviceAddress;
+    }
+
 }

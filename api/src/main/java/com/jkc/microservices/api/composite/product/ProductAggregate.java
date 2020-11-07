@@ -3,22 +3,31 @@ package com.jkc.microservices.api.composite.product;
 import java.util.List;
 
 public class ProductAggregate {
-    private final int productId;
+    private final int productID;
     private final String name;
     private final double weight;
     private final List<RecommendationSummary> recommendations;
     private final List<ReviewSummary> reviews;
     private final ServiceAddresses serviceAddresses;
 
+    public ProductAggregate() {
+        productID = 0;
+        name = null;
+        weight = 0;
+        recommendations = null;
+        reviews = null;
+        serviceAddresses = null;
+    }
+
     public ProductAggregate(
-            int productId,
+            int productID,
             String name,
             double weight,
             List<RecommendationSummary> recommendations,
             List<ReviewSummary> reviews,
             ServiceAddresses serviceAddresses) {
 
-        this.productId = productId;
+        this.productID = productID;
         this.name = name;
         this.weight = weight;
         this.recommendations = recommendations;
@@ -26,8 +35,8 @@ public class ProductAggregate {
         this.serviceAddresses = serviceAddresses;
     }
 
-    public int getProductId() {
-        return productId;
+    public int getProductID() {
+        return productID;
     }
 
     public String getName() {

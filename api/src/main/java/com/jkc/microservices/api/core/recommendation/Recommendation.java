@@ -1,12 +1,12 @@
 package com.jkc.microservices.api.core.recommendation;
 
 public class Recommendation {
-    private final int productID;
-    private final int recommendationID;
-    private final String author;
-    private final double rate;
-    private final String content;
-    private final String serviceAddress;
+    private int productID;
+    private int recommendationID;
+    private String author;
+    private double rate;
+    private String content;
+    private String serviceAddress;
 
     public Recommendation() {
         this.productID = 0;
@@ -30,23 +30,47 @@ public class Recommendation {
         return productID;
     }
 
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
     public int getRecommendationID() {
         return recommendationID;
+    }
+
+    public void setRecommendationID(int recommendationID) {
+        this.recommendationID = recommendationID;
     }
 
     public String getAuthor() {
         return author;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public double getRate() {
         return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 
     public String getContent() {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getServiceAddress() {
         return serviceAddress;
+    }
+
+    public void setServiceAddress(String serviceAddress) {
+        this.serviceAddress = serviceAddress;
     }
 }

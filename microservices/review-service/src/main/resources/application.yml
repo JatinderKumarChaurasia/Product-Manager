@@ -6,10 +6,26 @@ server:
 logging:
   level:
     root: INFO
+    org.hibernate.SQL: DEBUG
     com.jkc.microservices: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/review-db
+    username: user
+    password: pwd
+    hikari:
+      initialization-fail-timeout: 2
+    platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
 ---
 spring:
   profiles: docker
+  datasource:
+    url: jdbc:mysql://mysql/review-db
 server:
   port: 7004
