@@ -28,14 +28,6 @@ class GlobalControllerExceptionHandler {
         return createHttpErrorInfo(HttpStatus.UNPROCESSABLE_ENTITY, serverHttpRequest, exception);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    @ExceptionHandler(InternalServerException.class)
-    public @ResponseBody
-    HttpErrorInfo handleInternalServerException(ServerHttpRequest serverHttpRequest, Exception exception) {
-        LOG.debug("handling internal server error");
-        return createHttpErrorInfo(HttpStatus.INTERNAL_SERVER_ERROR, serverHttpRequest, exception);
-    }
-
     private HttpErrorInfo createHttpErrorInfo(HttpStatus httpStatus, ServerHttpRequest serverHttpRequest, Exception exception) {
         final String path = serverHttpRequest.getPath().pathWithinApplication().value();
         final String exceptionMessage = exception.getMessage();

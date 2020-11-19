@@ -16,16 +16,71 @@ spring:
     username: user
     password: pwd
     hikari:
-      initialization-fail-timeout: 2
+      initialization-fail-timeout: 60000
     platform: mysql
   jpa:
     hibernate:
       ddl-auto: update
     generate-ddl: true
+  cloud:
+    stream:
+      default-binder: rabbit
+      default:
+        content_type: "application/json"
+      bindings:
+        input:
+          destination: reviews
+          group: reviewsGroup
+          consumer:
+            max_attempts: 3
+            back_off_initial_interval: 500
+            back_off_max_interval: 1000
+            back_off_multiplier: 2.0
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              auto_bind_dlq: true
+              republish_to_dlq: true
+      kafka:
+        bindings:
+          input:
+            consumer:
+              enable_dlq: true
+        binder:
+          brokers: 127.0.0.1
+          auto-create-topics: true
+          default_broker_port: 9092
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: adminuser
+    password: adminuser
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 ---
 spring:
-  profiles: docker
   datasource:
     url: jdbc:mysql://mysql/review-db
+  rabbitmq:
+    host: rabbitmq
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka
+  config:
+    activate:
+      on-profile: docker
+
 server:
   port: 7004

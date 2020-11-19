@@ -18,7 +18,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/.gitignore">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api/.gitattributes">
           <value>
             <set />
           </value>
@@ -88,6 +98,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/api/src/main/java/com/jkc/microservices/api/event/EventModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/docker-compose-kafka.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/docker-compose-partitions.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/docker-compose.yml">
           <value>
             <set />
@@ -114,6 +139,26 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/SwaggerConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/HealthCheck.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/HealthConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/MessageSources.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/main/java/com/jkc/microservices/composite/product/configurations/MyReactiveHealthIndicator.java">
           <value>
             <set />
           </value>
@@ -153,6 +198,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/test/java/com/jkc/microservices/composite/product/IsSameEvent.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/test/java/com/jkc/microservices/composite/product/IsSameEventTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/test/java/com/jkc/microservices/composite/product/MessagingTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/product-composite-service/src/test/java/com/jkc/microservices/composite/product/ProductCompositeServiceApplicationTests.java">
           <value>
             <set />
@@ -179,6 +239,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/mappers/ProductMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/product-service/src/main/java/com/jkc/microservices/core/product/messaging/MessageProcessor.java">
           <value>
             <set />
           </value>
@@ -253,6 +318,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/messaging/MessageProcessor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/recommendation-service/src/main/java/com/jkc/microservices/core/recommendation/models/RecommendationEntity.java">
           <value>
             <set />
@@ -323,6 +393,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/messaging/MessageProcessor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/review-service/src/main/java/com/jkc/microservices/core/review/model/ReviewEntity.java">
           <value>
             <set />
@@ -388,6 +463,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/exceptions/EventProcessingException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/exceptions/InternalServerException.java">
           <value>
             <set />
@@ -414,6 +494,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/util/src/main/java/com/jkc/microservices/util/http/ServiceUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/util/src/test/java/com/jkc/microservices/util/ReactorTest.java">
           <value>
             <set />
           </value>

@@ -85,4 +85,12 @@ public class ReviewEntity {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "ReviewEntity{" +
+                "productID=" + productID +
+                ", reviewID=" + reviewID +
+                '}';
+    }
 }

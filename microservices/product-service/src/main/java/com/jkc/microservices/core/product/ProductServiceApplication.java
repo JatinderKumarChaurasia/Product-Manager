@@ -11,10 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.mapping.context.MappingContext;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.index.IndexResolver;
 import org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexResolver;
+import org.springframework.data.mongodb.core.index.ReactiveIndexOperations;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 
@@ -22,10 +22,10 @@ import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 @ComponentScan("com.jkc.microservices")
 public class ProductServiceApplication {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceApplication.class);
-    private final MongoOperations mongoTemplate;
+    private final ReactiveMongoOperations mongoTemplate;
 
     @Autowired
-    public ProductServiceApplication(MongoOperations mongoTemplate) {
+    public ProductServiceApplication(ReactiveMongoOperations mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
@@ -40,7 +40,7 @@ public class ProductServiceApplication {
     public void initIndicesAfterStartup() {
         MappingContext<? extends MongoPersistentEntity<?>, MongoPersistentProperty> mappingContext = mongoTemplate.getConverter().getMappingContext();
         IndexResolver indexResolver = new MongoPersistentEntityIndexResolver(mappingContext);
-        IndexOperations indexOperations = mongoTemplate.indexOps(ProductEntity.class);
-        indexResolver.resolveIndexFor(ProductEntity.class).forEach(indexOperations::ensureIndex);
+        ReactiveIndexOperations indexOperations = mongoTemplate.indexOps(ProductEntity.class);
+        indexResolver.resolveIndexFor(ProductEntity.class).forEach(definition -> indexOperations.ensureIndex(definition).block());
     }
 }

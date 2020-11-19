@@ -8,19 +8,70 @@ spring:
       host: localhost
       port: 27017
       database: recommendation-db
+  cloud:
+    stream:
+      default-binder: rabbit
+      default:
+        content_type: application/json
+      bindings:
+        input:
+          destination: recommendations
+          group: recommendationsGroup
+          consumer:
+            max_attempts: 3
+            back_off_initial_interval: 500
+            back_off_max_interval: 1000
+            back_off_multiplier: 2.0
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              auto_bind_dlq: true
+              republish_to_dlq: true
+      kafka:
+        bindings:
+          input:
+            consumer:
+              enable_dlq: true
+        binder:
+          brokers: 127.0.0.1
+          default_broker_port: 9092
+          auto-create-topics: true
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: adminuser
+    password: adminuser
 
 logging:
   level:
     root: INFO
     com.jkc.microservices: DEBUG
     org.springframework.data.mongodb.core: DEBUG
-
+management:
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 ---
 server:
   port: 7004
 spring:
-  profiles: docker
   data:
     mongodb:
       host: mongodb
+  rabbitmq:
+    host: rabbitmq
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka
+  config:
+    activate:
+      on-profile: docker

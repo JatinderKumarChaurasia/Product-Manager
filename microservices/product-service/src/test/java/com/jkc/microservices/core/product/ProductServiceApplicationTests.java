@@ -1,23 +1,24 @@
 package com.jkc.microservices.core.product;
 
 import com.jkc.microservices.api.core.product.Product;
-import com.jkc.microservices.core.product.models.ProductEntity;
+import com.jkc.microservices.api.event.EventModel;
 import com.jkc.microservices.core.product.repositories.ProductRepository;
+import com.jkc.microservices.util.exceptions.InvalidInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.http.HttpStatus;
+import org.springframework.integration.channel.AbstractMessageChannel;
+import org.springframework.messaging.MessagingException;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.core.publisher.Mono;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @ExtendWith(SpringExtension.class)
@@ -25,51 +26,62 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @AutoConfigureWebTestClient
 class ProductServiceApplicationTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceApplicationTests.class);
-
     @Autowired
     private WebTestClient webTestClient;
 
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private Sink channels;
+
+    private AbstractMessageChannel abstractMessageChannel = null;
+
     @BeforeEach
     public void setupDb() {
-        productRepository.deleteAll();
+        abstractMessageChannel = (AbstractMessageChannel) channels.input();
+        productRepository.deleteAll().block();
     }
 
     @Test
     void getProductByID() {
         int productID = 1;
-        postAndVerifyProduct(productID, HttpStatus.OK);
-        assertTrue(productRepository.findByProductID(productID).isPresent());
+        assertNull(productRepository.findByProductID(productID).block());
+        assertEquals(0, productRepository.count().block());
+        sendCreateProductEvent(productID);
+        assertNotNull(productRepository.findByProductID(productID).block());
+        assertEquals(1, productRepository.count().block());
+
         getAndVerifyProduct(productID, HttpStatus.OK).jsonPath("$.productID").isEqualTo(productID);
-//        webTestClient.get().uri("/product/" + productID).accept(APPLICATION_JSON).exchange().expectStatus().isOk().expectHeader().contentType(APPLICATION_JSON).expectBody().jsonPath("$.productID").isEqualTo(productID);
     }
 
     @Test
     void duplicateError() {
         int productID = 1;
-        postAndVerifyProduct(productID, HttpStatus.OK);
-        if (productRepository.findByProductID(productID).isPresent()) {
-            System.out.println("iS PRESENT : " + productRepository.findByProductID(productID).get());
+        assertNull(productRepository.findByProductID(productID).block());
+        sendCreateProductEvent(productID);
+        assertNotNull(productRepository.findByProductID(productID).block());
+        try {
+            sendCreateProductEvent(productID);
+            fail("Expected a MessagingException here!");
+        } catch (MessagingException messagingException) {
+            if (messagingException.getCause() instanceof InvalidInputException) {
+                InvalidInputException invalidInputException = (InvalidInputException) messagingException.getCause();
+                assertEquals("Duplicate key, Product ID: " + productID, invalidInputException.getMessage());
+            } else {
+                fail("Expected a InvalidInputException as the root cause!");
+            }
         }
-        ProductEntity product = productRepository.findByProductID(productID).get();
-        LOGGER.debug("Product : {}", product.getProductID());
-        assertTrue(productRepository.findByProductID(productID).isPresent());
-        postAndVerifyProduct(productID, HttpStatus.UNPROCESSABLE_ENTITY)
-                .jsonPath("$.path").isEqualTo("/product");
-//                .jsonPath("$.message").isEqualTo("Duplicate key, Product ID: " + productID);
     }
 
     @Test
     void deleteProduct() {
         int productID = 1;
-        postAndVerifyProduct(productID, HttpStatus.OK);
-        assertTrue(productRepository.findByProductID(productID).isPresent());
-        deleteAndVerifyProduct(productID, HttpStatus.OK);
-        assertFalse(productRepository.findByProductID(productID).isPresent());
-        deleteAndVerifyProduct(productID, HttpStatus.OK);
+        sendCreateProductEvent(productID);
+        assertNotNull(productRepository.findByProductID(productID).block());
+        sendDeleteProductEvent(productID);
+        assertNull(productRepository.findByProductID(productID).block());
+        sendDeleteProductEvent(productID);
     }
 
     @Test
@@ -103,19 +115,14 @@ class ProductServiceApplicationTests {
         return webTestClient.get().uri("/product" + productIDPath).accept(APPLICATION_JSON).exchange().expectStatus().isEqualTo(expectedStatus).expectHeader().contentType(APPLICATION_JSON).expectBody();
     }
 
-    private WebTestClient.BodyContentSpec postAndVerifyProduct(int productID, HttpStatus expectedStatus) {
+    private void sendCreateProductEvent(int productID) {
         Product product = new Product(productID, "Name " + productID, productID, "SA");
-        return webTestClient.post()
-                .uri("/product")
-                .body(Mono.just(product).log(), Product.class)
-                .accept(APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isEqualTo(expectedStatus)
-                .expectHeader().contentType(APPLICATION_JSON)
-                .expectBody();
+        EventModel<Integer, Product> productEventModel = new EventModel<>(EventModel.TYPE.CREATE, productID, product);
+        abstractMessageChannel.send(new GenericMessage<>(productEventModel));
     }
 
-    private WebTestClient.BodyContentSpec deleteAndVerifyProduct(int productID, HttpStatus expectedStatus) {
-        return webTestClient.delete().uri("/product/" + productID).accept(APPLICATION_JSON).exchange().expectStatus().isEqualTo(expectedStatus).expectBody();
+    private void sendDeleteProductEvent(int productID) {
+        EventModel<Integer, Product> productEventModel = new EventModel<>(EventModel.TYPE.DELETE, productID, null);
+        abstractMessageChannel.send(new GenericMessage<>(productEventModel));
     }
 }

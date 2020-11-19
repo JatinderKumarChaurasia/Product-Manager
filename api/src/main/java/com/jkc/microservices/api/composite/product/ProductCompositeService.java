@@ -2,6 +2,7 @@ package com.jkc.microservices.api.composite.product;
 
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @SwaggerDefinition(info = @Info(
         title = "Api contains methods to get the product by productID",
@@ -42,7 +43,7 @@ public interface ProductCompositeService {
             }
     )
     @GetMapping(value = "/product-composite/{productID}", produces = "application/json")
-    ProductAggregate getProductComposite(@PathVariable int productID);
+    Mono<ProductAggregate> getProductComposite(@PathVariable int productID);
 
     /**
      * usage: curl -X POST $HOST:$PORT/product-composite \

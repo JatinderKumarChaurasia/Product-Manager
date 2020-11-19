@@ -1,4 +1,16 @@
 
-]	java:S107&"AConstructor has 8 parameters, which is greater than 7 authorized.(Ş¾ˆ¸8„÷ÂÈÔ.
-n
-java:S1192z"LDefine a constant instead of duplicating this literal "?productID=" 4 times.(¨ˆéªûÿÿÿÿ8à¡°™Ø.
+
+java:S1128"dRemove this unused import 'org.springframework.amqp.support.converter.Jackson2JsonMessageConverter'.(â…Ìï8Ø¢ÿÜ.
+]	java:S1074"AConstructor has 9 parameters, which is greater than 7 authorized.(Ş¾ˆ¸8„÷ÂÈÔ.
+K
+java:S1199Ò"-Extract this nested code block into a method.(üØô8É–ö¬Ü.
+B
+java:S2629Ë"$Invoke method(s) only conditionally.(ï¯à´8É–ö¬Ü.
+}
+java:S1128"`Remove this unused import 'org.springframework.http.converter.json.Jackson2ObjectMapperBuilder'.(•ÉÎ¢8Ø¢ÿÜ.
+l
+java:S1128"PRemove this unused import 'com.fasterxml.jackson.databind.SerializationFeature'.(ª¥Æ*8’Í™ÿÜ.
+R
+java:S1144¹"4Remove this unused private "getErrorMessage" method.(Ïûäø8ØÄô­Ü.
+e
+java:S1128"HRemove this unused import 'org.springframework.context.annotation.Bean'.(‚î‰Ş8Ø¢ÿÜ.

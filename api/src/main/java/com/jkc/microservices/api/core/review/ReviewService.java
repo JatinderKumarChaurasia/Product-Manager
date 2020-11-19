@@ -1,8 +1,7 @@
 package com.jkc.microservices.api.core.review;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public interface ReviewService {
     /**
@@ -13,7 +12,7 @@ public interface ReviewService {
      */
 
     @GetMapping(value = "/review", produces = "application/json")
-    List<Review> getReviews(@RequestParam(value = "productID", required = true) int productID);
+    Flux<Review> getReviews(@RequestParam(value = "productID", required = true) int productID);
 
     /**
      * usage: curl -X POST $HOST:$PORT/review \

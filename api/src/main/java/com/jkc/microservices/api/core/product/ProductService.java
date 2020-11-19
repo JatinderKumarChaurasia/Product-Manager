@@ -1,6 +1,7 @@
 package com.jkc.microservices.api.core.product;
 
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 public interface ProductService {
     /**
@@ -11,7 +12,7 @@ public interface ProductService {
      */
 
     @GetMapping(value = "/product/{productID}", produces = "application/json")
-    Product getProduct(@PathVariable int productID);
+    Mono<Product> getProduct(@PathVariable int productID);
 
     /**
      * curl -X POST $HOST:$PORT/product \

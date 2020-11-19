@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.5.RELEASE'
+	id 'org.springframework.boot' version '2.4.0'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 	id 'eclipse'
@@ -13,6 +13,10 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	springCloudVersion = "Hoxton.SR9"
+}
+
 dependencies {
 	// local libraries
 	implementation project (':api')
@@ -24,6 +28,8 @@ dependencies {
 
 	/** Adding required database dependencies */
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+	implementation('org.springframework.cloud:spring-cloud-starter-stream-kafka')
 	implementation 'mysql:mysql-connector-java'
 
 	// An annotation processor for generating type-safe bean mappers
@@ -37,9 +43,17 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation('org.springframework.cloud:spring-cloud-stream-test-support')
 	testImplementation 'com.h2database:h2'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 test {
 	useJUnitPlatform()
 }
+

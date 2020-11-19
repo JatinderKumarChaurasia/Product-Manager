@@ -2,9 +2,7 @@ package com.jkc.microservices.composite.product;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 
@@ -16,9 +14,9 @@ public class ProductCompositeServiceApplication implements WebFluxConfigurer {
         SpringApplication.run(ProductCompositeServiceApplication.class, args);
     }
 
-    @Bean
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+//    @Bean
+//    RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
 
 }

@@ -11,10 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.mapping.context.MappingContext;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.index.IndexResolver;
 import org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexResolver;
+import org.springframework.data.mongodb.core.index.ReactiveIndexOperations;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 
@@ -23,8 +23,9 @@ import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 public class RecommendationServiceApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RecommendationServiceApplication.class);
+
     @Autowired
-    MongoOperations mongoTemplate;
+    ReactiveMongoOperations reactiveMongoOperations;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(RecommendationServiceApplication.class, args);
@@ -36,10 +37,9 @@ public class RecommendationServiceApplication {
 
     @EventListener(ContextRefreshedEvent.class)
     public void initIndicesAfterStartup() {
-        MappingContext<? extends MongoPersistentEntity<?>, MongoPersistentProperty> mappingContext = mongoTemplate.getConverter().getMappingContext();
+        MappingContext<? extends MongoPersistentEntity<?>, MongoPersistentProperty> mappingContext = reactiveMongoOperations.getConverter().getMappingContext();
         IndexResolver indexResolver = new MongoPersistentEntityIndexResolver(mappingContext);
-        IndexOperations indexOperations = mongoTemplate.indexOps(RecommendationEntity.class);
-        indexResolver.resolveIndexFor(RecommendationEntity.class).forEach(indexOperations::ensureIndex);
+        ReactiveIndexOperations reactiveIndexOperations = reactiveMongoOperations.indexOps(RecommendationEntity.class);
+        indexResolver.resolveIndexFor(RecommendationEntity.class).forEach(i -> reactiveIndexOperations.ensureIndex(i).block());
     }
-
 }

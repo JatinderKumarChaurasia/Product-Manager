@@ -5,7 +5,7 @@ server:
 
 app:
   product-service:
-    host: localhost
+    hostname: localhost
     port: 7001
   recommendation-service:
     host: localhost
@@ -18,7 +18,6 @@ logging:
   level:
     root: INFO
     com.jkc.microservices: DEBUG
-
 # Swagger Data
 api:
   common:
@@ -31,44 +30,102 @@ api:
     contact:
       name: Absolute Chemist
       url: 'https://github.com/JatinderKumarChaurasia/Product-Manager'
-      email: 'absolutechemist@gmail.com'
+      email: 'absolute@gmail.com'
   product-composite:
     get-composite-product:
       description: Returns a composite view of the specified product id
       notes: |
         # Normal response
         If the requested product id is found the method will return information regarding:
-        1. Base product information
-        1. Reviews
-        1. Recommendations
-        1. Service Addresses\n(technical information regarding the addresses of the microservices that created the response)
+        1. product information
+        2. Reviews
+        3. Recommendations
+        4. Service Addresses
+        (technical information regarding the addresses of the microservices that created the response)
+
         # Expected partial and error responses
         In the following cases, only a partial response be created (used to simplify testing of error conditions)
-        ## Product id 113
-        200 - Ok, but no recommendations will be returned
-        ## Product id 213
-        200 - Ok, but no reviews will be returned
-        ## Non numerical product id
-        400 - A <b>Bad Request</b> error will be returned
-        ## Product id 13
-        404 - A <b>Not Found</b> error will be returned
-        ## Negative product ids
-        422 - An <b>Unprocessable Entity</b> error will be returned
+        1. If no product information is found, a <b>404 - Not Found</b> error will be returned
+        2. In no recommendations or reviews are found for a product, a partial response will be returned
+
+    create-composite-product:
+      description: Create a composite Product
+      notes: |
+        # Normal Response:
+        The composite product information posted to the API will be splitted up and stored as separate product-info, recommendation and review entities.
+
+        # Expected Error Messages:
+        1. If a product with the same productID as specified in the posted information already exists,a <b>422 - Unprocessable Entity</b> error with a "duplicate key" error message will be returned</br>
+    delete-composite-product:
+      description: Delete a composite product
+      notes: |
+        # Normal Response
+        Entities for product information, recommendations and reviews related to the specificed productId will be deleted.
+        The implementation of the delete method is idempotent, i.e. it can be called several times with the same response.
+        This means that a delete request of a non existing product will return <b>200 Ok</b>.
+
+spring:
+  cloud:
+    stream:
+      default-binder: rabbit
+      default:
+        content_type: "application/json"
+      bindings:
+        output-products:
+          destination: products
+          producer:
+            required-groups: auditGroup
+        output-recommendations:
+          destination: recommendations
+          producer:
+            required-groups: auditGroup
+        output-reviews:
+          destination: reviews
+          producer:
+            required-groups: auditGroup
+      kafka:
+        binder:
+          brokers: 127.0.0.1
+          default_broker_port: 9092
+          auto-create-topics: true
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: adminuser
+    password: adminuser
+management:
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 ---
 
 spring:
-  profiles: docker
+  rabbitmq:
+    host: rabbitmq
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka
+  config:
+    activate:
+      on-profile: docker
 server:
   port: 7004
 
 app:
   product-service:
-    host: product
+    host: 127.0.0.1
     port: 7004
   recommendation-service:
-    host: recommendation
+    host: 127.0.0.1
     port: 7004
   review-service:
-    host: review
+    host: 127.0.0.1
     port: 7004

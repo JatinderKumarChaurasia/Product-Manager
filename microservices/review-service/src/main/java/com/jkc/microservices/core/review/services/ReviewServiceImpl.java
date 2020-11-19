@@ -7,13 +7,18 @@ import com.jkc.microservices.core.review.model.ReviewEntity;
 import com.jkc.microservices.core.review.repositories.ReviewRepository;
 import com.jkc.microservices.util.exceptions.InvalidInputException;
 import com.jkc.microservices.util.http.ServiceUtil;
+import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Scheduler;
 
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.logging.Level;
 
 @RestController
 public class ReviewServiceImpl implements ReviewService {
@@ -25,11 +30,14 @@ public class ReviewServiceImpl implements ReviewService {
 
     private final ServiceUtil serviceUtil;
 
+    private final Scheduler scheduler;
+
     @Autowired
-    public ReviewServiceImpl(ReviewRepository reviewRepository, ReviewMapper reviewMapper, ServiceUtil serviceUtil) {
+    public ReviewServiceImpl(ReviewRepository reviewRepository, ReviewMapper reviewMapper, ServiceUtil serviceUtil, Scheduler scheduler) {
         this.reviewRepository = reviewRepository;
         this.reviewMapper = reviewMapper;
         this.serviceUtil = serviceUtil;
+        this.scheduler = scheduler;
     }
 
     /**
@@ -39,15 +47,17 @@ public class ReviewServiceImpl implements ReviewService {
      * @return list of reviews for product associated with productID
      */
     @Override
-    public List<Review> getReviews(int productID) {
+    public Flux<Review> getReviews(int productID) {
         if (productID < 1) throw new InvalidInputException("Invalid productId: " + productID);
+        return asyncFlux(() -> Flux.fromIterable(getByProductID(productID))).log(null, Level.FINE);
+    }
 
+    protected List<Review> getByProductID(int productID) {
         List<ReviewEntity> reviewEntities = reviewRepository.findByProductID(productID);
         List<Review> reviews = reviewMapper.reviewEntitiesToReviewApisList(reviewEntities);
         reviews.forEach(review -> review.setServiceAddress(serviceUtil.getServiceAddress()));
 
         LOGGER.debug("getReviews: response size: {}", reviews.size());
-
         return reviews;
     }
 
@@ -67,7 +77,7 @@ public class ReviewServiceImpl implements ReviewService {
             LOGGER.debug("createReview: created a reviewEntity: {}/{}", review.getProductID(), review.getReviewID());
             return reviewMapper.reviewEntityToReviewApi(newEntity);
         } catch (DataIntegrityViolationException exception) {
-            throw new InvalidInputException("Duplicate key, Product Id: " + review.getProductID() + ", Review Id:" + review.getReviewID());
+            throw new InvalidInputException("Duplicate key, Product ID: " + review.getProductID() + ", Review ID:" + review.getReviewID());
         }
     }
 
@@ -80,5 +90,9 @@ public class ReviewServiceImpl implements ReviewService {
     public void deleteReview(int productID) {
         LOGGER.debug("deleteReviews: tries to delete reviews for the product with productId: {}", productID);
         reviewRepository.deleteAll(reviewRepository.findByProductID(productID));
+    }
+
+    private <T> Flux<T> asyncFlux(Supplier<? extends Publisher<T>> publisherSupplier) {
+        return Flux.defer(publisherSupplier).subscribeOn(scheduler);
     }
 }

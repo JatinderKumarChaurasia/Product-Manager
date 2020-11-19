@@ -7,7 +7,7 @@
 
 buildscript {
     ext {
-        springBootVersion = '2.3.5.RELEASE'
+        springBootVersion = '2.4.0'
     }
     repositories {
         mavenCentral()
@@ -27,7 +27,7 @@ apply plugin: 'eclipse'
 
 group = 'com.jkc.microservices.api'
 version = '1.0.0-SNAPSHOT'
-sourceCompatibility = '15'
+sourceCompatibility = 15
 
 repositories {
     mavenCentral()

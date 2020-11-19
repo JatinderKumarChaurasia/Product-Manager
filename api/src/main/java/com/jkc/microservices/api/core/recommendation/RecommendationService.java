@@ -1,8 +1,7 @@
 package com.jkc.microservices.api.core.recommendation;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public interface RecommendationService {
     /**
@@ -10,10 +9,11 @@ public interface RecommendationService {
      *
      * @param productID "provided productID: int"
      * @return list of recommendations for that @productID
+     * @apiNote Get Flux<Recommendations> recommendations
      */
 
     @GetMapping(value = "/recommendation", produces = "application/json")
-    List<Recommendation> getRecommendations(@RequestParam(value = "productID", required = true) int productID);
+    Flux<Recommendation> getRecommendations(@RequestParam(value = "productID", required = true) int productID);
 
     /**
      * usage: curl -X POST $HOST:$PORT/recommendation \
@@ -21,7 +21,8 @@ public interface RecommendationService {
      * '{"productID":123,"recommendationID":456,"author":"me","rate":5,"content":"yada, yada, yada"}'
      *
      * @param recommendation description: recommendation:Recommendation
-     * @return
+     * @return Recommendation
+     * @apiNote Create recommendation
      */
     @PostMapping(value = "/recommendation", consumes = "application/json", produces = "application/json")
     Recommendation createRecommendation(@RequestBody Recommendation recommendation);
@@ -29,8 +30,9 @@ public interface RecommendationService {
     /**
      * usage: curl -X DELETE $HOST:$PORT/recommendation?productID=1
      *
-     * @param productID
+     * @param productID productID
+     * @apiNote : Delete Recommendation By ProductID
      */
     @DeleteMapping("/recommendation")
-    void deleteRecommendation(@RequestParam(value = "productID", required = true) int productID);
+    void deleteRecommendations(@RequestParam(value = "productID", required = true) int productID);
 }
